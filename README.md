@@ -12,11 +12,13 @@ Creating this web application will provide exposure to:
 
 ## Specifications
 
-- [ ] Any user can add books into the system via an admin page
+- [ ] Admin user can add and edit books in the system via an admin page
+- [ ] Logged In users can save books
 - [ ] Books entered in the system are listed on the home page, in pages of 10
-- [ ] Users can search for books by title OR by author OR by genre, and search results will be presented in a new page
-- [ ] Users can view book details on a book detail page, linked to from the listing or search pages
-- [ ] All code submissions are peer reviewed via GitHub PR by at least two members of the team, and master is always in a stable state (tests passed, site functions)
+- [ ] Users can search for books by specifing title or author and optionally genre
+- [ ] Users can view book details on a book detail page, linked to from the listing and search pages
+- [ ] All code submissions are peer reviewed via GitHub PR and master is always in a stable state
+- [ ] Use OOP to create an API for database queries
 
 ### Required
 
@@ -24,12 +26,16 @@ Creating this web application will provide exposure to:
 
 ## Quality Rubric
 
-- Code is well formatted without any linting errors
-- Variables, functions, css classes, etc. are meaningfully named (no comments exist in code to explain functionality - the names serve that function)
-- Functions are small and serve a single purpose
-- Code is well organized into a meaningful file structure
-- Code is reasonably tested with a test suite
-- Interface is user friendly
+- [ ] Interface is user friendly
+- [ ] Code is reasonably tested with a passing test suite
+- [ ] Code is well formatted without any linting errors
+- [ ] Site works for all key features
+- [ ] Follows TDD
+- [ ] Variables, functions, css classes, etc. are meaningfully named (no comments exist in code to explain functionality - the names serve that function)
+- [ ] Functions are small and serve a single purpose
+- [ ] Code is well organized into a meaningful file structure
+
+
 
 ---
 
