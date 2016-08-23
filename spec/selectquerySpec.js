@@ -1,6 +1,6 @@
 const SelectQuery = require('../models/SelectQuery');
 
-fdescribe("toString", () =>  {
+describe("toString", () =>  {
   it("returns a SELECT * from table statement",  () =>{
     var query = new SelectQuery( "table" )
     expect(query.toString() ).toEqual( 'SELECT * FROM table' )
