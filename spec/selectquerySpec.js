@@ -21,7 +21,7 @@ describe("toString", () =>  {
     expect(query.toString() ).toEqual( 'SELECT * FROM table' )
   })
 
-  it("returns a SQL SELECT with an empty where when not specified",  () =>{
+  it("returns a SQL SELECT with an empty WHERE when not specified",  () =>{
     var query = new SelectQuery( "table",  {where: []} )
     expect(query.toString() ).toEqual( 'SELECT * FROM table' )
   })
