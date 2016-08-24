@@ -1,6 +1,6 @@
 const InsertQuery = require('../models/InsertQuery');
 
-describe("toInsert", () =>  {
+fdescribe("toInsert", () =>  {
   it("returns a INSERT INTO * VALUES table statement",  () =>{
     var query = new InsertQuery( "table" )
     expect(query.toInsert() ).toEqual( 'INSERT INTO * VALUES table' )
