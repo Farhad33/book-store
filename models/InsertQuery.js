@@ -11,7 +11,7 @@ class InsertQuery {
   }
 
   toInsert() {
-    return `INSERT INTO ${this.getFields()} VALUES ${this.table}${this.getWhere()}`
+    return `INSERT INTO ${this.getFields()} VALUES ${this.table}${this.getValues()}`
   }
 
   getFields() {
@@ -22,16 +22,16 @@ class InsertQuery {
     }
   }
 
-  getWhere() {
-    if( this.where.length === 0 ) {
+  getValues() {
+    if( this.values.length === 0 ) {
       return ''
-    } else if( typeof(this.where) === 'string' ) {
+    } else if( typeof(this.values) === 'string' ) {
       return ''
     }else {
-       const clause = this.where.map( object => {
+       const clause = this.values.map( object => {
          return Object.keys( object ).map( key => `${key}=${object[key]}`)
        }).reduce( (a, b) => a.concat( b ), [] )
-       return ` WHERE ${clause.join( ' AND ' )}`
+       return ` VALUES ${clause.join( ' AND ' )}`
     }
   }
 
