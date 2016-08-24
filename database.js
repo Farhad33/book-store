@@ -1,16 +1,26 @@
 'use strict';
 
-const databaseName = process.env.NODE_ENV ? 'book-store-test' : 'book-store'
+const databaseName = 'book-store'
 const pgp = require('pg-promise')();
-const connectionString = `postgres://${process.env.USER}@localhost:5432/book-store`
+const connectionString = `postgres://${process.env.USER}@localhost:5432/${databaseName}`
 const db = pgp(connectionString);
 
-const getAllBooks = function(id){
-  return db.any("select * from books");
+
+var SelectQuery = require('./models/selectQuery');
+
+
+// const getAllBooks = function() {
+//   return database.any( selectBooks.toString() )
+// }
+
+const Book = {
+  all: () => db.any( (new SelectQuery( 'book' )).toString() )
 }
 
 module.exports = {
   pgp: pgp,
   db: db,
-  getAllBooks: getAllBooks,
+  Book: Book
 };
+
+// export { Book }
