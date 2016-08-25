@@ -7,11 +7,13 @@ class SelectQuery {
     this.table = table
     this.fields = options['fields'] || []
     this.where = options['where'] || []
-
+    this.page = parseInt( options.page || 1 )
+    this.size = parseInt( options.size || 10 )
+    this.offset = this.size * ( this.page - 1 )
   }
 
   toString() {
-    return `SELECT ${this.getFields()} FROM ${this.table}${this.getWhere()}`
+    return `SELECT ${this.getFields()} FROM ${this.table}${this.getWhere()} LIMIT ${this.size} OFFSET ${this.offset}`
   }
 
   getFields() {

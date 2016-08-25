@@ -4,4 +4,17 @@ block content
   h1= 'The MJ Book Store'
   p Our Store Is Always Open
 
-  a(href="/books/")='Check out our books!'
+  div
+   table.table
+     thead
+       tr
+         th #
+         th Book Title
+     tbody
+       for book in books
+         tr
+           td
+             strong= book.id
+           td
+             a(href="books/"+book.id)= book.title
+             
