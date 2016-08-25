@@ -1,15 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var database = require('../database');
-//
-// import express from 'express'
-// import database, { Book } from '../database'
-// const router = express.Router()
 
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  database.Book.all().then( books => res.render('books', {books} )).catch(err => res.json(err))
+
+  let page = parseInt(req.query.page, 10)
+  if (isNaN(page) || page < 1) page = 1
+
+  database.Book.all()
+  .then( books =>
+    res.render('books', {books}
+  ))
+  .catch(err => res.json(err))
 
 });
 

@@ -4,4 +4,21 @@ block content
   h1= 'The MJ Book Store'
   p Our Store Is Always Open
 
-  a(href="/books/")='Check out our books!'
+  div
+   table.table
+     thead
+       tr
+         th #
+         th Book Title
+     tbody
+       for book in books
+         tr
+           td
+             strong= book.id
+           td
+             a(href="/books/"+book.id)= book.title
+    if page > 1
+     a.btn.btn-default(href="/?page="+(page-1), role='button') Back
+    a.btn.btn-default(href="/?page="+(page+1), role='button') Next
+    .spaceGiverForm
+    a.btn.btn-default(href="/add", role='button') Add a Book
