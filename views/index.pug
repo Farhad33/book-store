@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= 'The MJ Book Store'
-  p Our Store Is Always Open
+  p Our Store is Free Tomorrow.
 
   div
    table.table
@@ -17,6 +17,7 @@ block content
              strong= book.id
            td
              a(href="/books/"+book.id)= book.title
+             
     if page > 1
      a.btn.btn-default(href="/?page="+(page-1), role='button') Back
     a.btn.btn-default(href="/?page="+(page+1), role='button') Next

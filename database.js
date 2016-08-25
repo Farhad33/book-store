@@ -11,10 +11,22 @@ const Book = {
   all: () => db.any( (new SelectQuery( 'book' )).toString() )
 }
 
+const paging = (options) => {
+  if (options.page) {
+    let PAGE_SIZE = 10
+    let offset = (options.page - 1) * PAGE_SIZE
+    variables.push(offset)
+    sql += `
+    LIMIT ${PAGE_SIZE}
+    OFFSET $${variables.length}
+    `
+  }
+}
 module.exports = {
   pgp: pgp,
   db: db,
-  Book: Book
+  Book: Book,
+  paging: paging
 };
 
 // export { Book }
