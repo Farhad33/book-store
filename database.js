@@ -8,7 +8,7 @@ const db = pgp(connectionString);
 var SelectQuery = require('./models/selectQuery');
 
 const Book = {
-  all: (page, size) => db.any( (new SelectQuery( 'book', { page, size } )).toString() )
+  all: (page, size) => db.any( (new SelectQuery( 'books', { page, size } )).toString() )
 }
 
 const Search = {
