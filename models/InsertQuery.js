@@ -1,23 +1,25 @@
 class InsertQuery {
   constructor(table, options = {}) {
     if( table === undefined  ) {
-       return 'Table is not available'
+       throw 'Table is not specified'
     }
 
     this.table = table
-    this.fields = options['fields'] || []
-    this.where = options['where'] || []
+    this.columns = options['columns'] || []
+    this.values = options['values'] || []
 
   }
 
   toInsert() {
-    return `INSERT INTO ${this.table} VALUES ${this.getFields()}${this.getValues()}`
+    return `INSERT INTO ${this.getColumns()} VALUES ${this.getValues()}`
   }
 
   getColumns() {
+    return `${this.table}(${this.columns.join(', ')})`
   }
 
   getValues() {
+    return `${this.values.join(', ')}`
   }
 
 }
