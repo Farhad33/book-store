@@ -1,12 +1,14 @@
 extends layout
 
 block content
-  form(action="/add", method="post") Add A Book!
-    input(type="text" name="book[title]", placeholder="Book Title")
-    input(type="text" name="book[authors][0][name]", placeholder="Author name")
-    input(type="text" name="book[authors][1][name]", placeholder="Author name")
-    input(type="text" name="book[authors][2][name]", placeholder="Author name")
-    select(name="book[genres]:focus {border: 3px solid #555}" multiple)
-      //- for genre in genres
-      //-   option(value=genre.id)= genre.title
-    input(type="submit", value="Submit your book!")
+  h1= 'Add A Book!'
+  div.container.col-md-10
+    form(action="/add", method="post")
+      input.form-control(type="text" name="book[title]", placeholder="Book Title")
+      input.form-control(type="text" name="book[authors][0][name]", placeholder="Author name")
+      input.form-control(type="text" name="book[authors][1][name]", placeholder="Author name")
+      input.form-control(type="text" name="book[authors][2][name]", placeholder="Author name")
+      select.form-control(name="book[genres]:focus {border: 3px solid #555}" multiple)
+        //- for genre in genres
+        //-   option(value=genre.id)= genre.title
+      input(type="submit", value="Submit your book!")
