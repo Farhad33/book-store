@@ -10,6 +10,7 @@ var SelectQuery = require('./models/selectQuery');
 const Book = {
   all: (page, size) => db.any( (new SelectQuery( 'books', { page, size } )).toString() ),
   one: id => db.one( (new SelectQuery( 'books', { where: [{ id }] } )).toString() )
+
 }
 
 const Search = {

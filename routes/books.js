@@ -14,4 +14,14 @@ router.get('/:Id/', function(req, res) {
 });
 
 
+router.post('/delete/:id', (req, res, next) =>{
+  const { id } = req.params
+
+  Book.delete( id )
+    .catch( error => res.send({ error, message: error.message }))
+    .then( book => res.render('index', {book} ))
+  next()
+})
+
+
 module.exports = router;
