@@ -8,8 +8,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:Id/', function(req, res) {
-  database.Book.one(req.params.id)
-    .then( book => res.render( 'books/details' , { where: [{id}] } ))
+  database.Book.one(req.params.Id)
+    .then( book => res.render( 'details' , { book } ))
     .catch( function( error ) { res.status( 500 ).send( error ) })
 });
 
