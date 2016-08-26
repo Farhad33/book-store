@@ -27,8 +27,8 @@ const Search = {
 
       variables.push(search_query)
       sql += `
-      LEFT JOIN author_books ON books.id=author_books.book_id
-      LEFT JOIN authors ON authors.id=author_books.author_id
+      LEFT JOIN book_authors ON books.id=book_authors.book_id
+      LEFT JOIN authors ON authors.id=book_authors.author_id
       LEFT JOIN book_genres ON books.id=book_genres.book_id
       LEFT JOIN genres ON genres.id=book_genres.genre_id
       WHERE LOWER(books.title)  LIKE $${variables.length}

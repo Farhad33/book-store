@@ -14,6 +14,8 @@ block content
              strong= book.id
            td
              a(href="books/"+book.id)= book.title
+           td
+             strong= book.description
 
    if page > 1
      a.btn.btn-default(href="/?page="+(page-1), role='button') Back

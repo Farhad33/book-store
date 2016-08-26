@@ -3,9 +3,23 @@ var router = express.Router();
 var database = require('../database');
 
 router.get('/', (req, res, next) => {
-  database.Book.all()
-  .then( books => res.render('books', { books } )).catch(err => res.json(err))
+  const { query } = req
+
+  const page = query.page || 1
+  const size = query.size || 10
+
+  database.Book.all( page, size )
+    .then( books => res.render( 'books', { books, page, size } ))
+    .catch( error => res.send({ error, message: error.message }))
 });
+
+router.get( '/add', (req, res) => {
+  res.render( 'add' )
+})
+
+router.post( '/', (req, res) => {
+  res.send({ book: req.body })
+})
 
 router.get('/:Id/', function(req, res) {
   database.Book.one(req.params.Id)
