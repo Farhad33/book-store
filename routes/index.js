@@ -1,20 +1,30 @@
-var express = require('express');
-var router = express.Router();
-var database = require('../database');
+const express = require('express')
+const router = express.Router()
+const database = require('../database')
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  let page = parseInt(req.query.page, 10)
-  if (isNaN(page) || page < 1) page = 1
-  
+  const page = query.page || 1
+  const size = query.size || 10
+
   database.Book.all()
   .then( books =>
     res.render('books', {books}
   ))
   .catch(err => res.json(err))
-});
+  
 
+  if( query.search_query === undefined ) {
+    database.Book.all( page, size )
+      .then( books => response.render( 'index', { books, page, size } ))
+      .catch( error => response.send({ error, message: error.message }))
+  } else {
+    database.Search.forBooks({ page, size, search_query: query.search_query })
+      .then( books => response.render( 'index', { books, page, size } ))
+      .catch( error => response.send({ error, message: error.message }))
+  }
+})
 
-
-module.exports = router;
+module.exports = router

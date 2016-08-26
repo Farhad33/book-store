@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS book;
 
-CREATE TABLE book (
+CREATE TABLE books (
   id SERIAL PRIMARY KEY,
   title varchar(255) NOT NULL,
 );
