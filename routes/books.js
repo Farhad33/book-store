@@ -1,23 +1,43 @@
 var express = require('express');
 var router = express.Router();
 var database = require('../database');
-//
-// import express from 'express'
-// import database, { Book } from '../database'
-// const router = express.Router()
 
-
-/* GET home page. */
 router.get('/', (req, res, next) => {
-  database.Book.all()
-  .then( books => res.render('books', { books } )).catch(err => res.json(err))
-});
+  const { query } = req
 
-router.get('/:Id/', function(req, res) {
-  database.Book.one(req.params.Book.id)
-    .then( book => res.render( 'books/details' , { book: books } ))
-    .catch( function( error ) { res.status( 500 ).send( error ) })
-});
+  const page = query.page || 1
+  const size = query.size || 10
+
+  database.Book.all( page, size )
+    .then( books => res.render( 'books', { books, page, size } ))
+    .catch( error => res.send({ error, message: error.message }))
+})
+
+router.get( '/add', (req, res) => {
+  res.render( 'add' )
+})
+
+router.post( '/', (req, res) => {
+  database.Book.insert( req.body )
+  .then(id => res.send( '/' , {book: req.body }) )
+  .catch( error => res.send({ error, message: error.message }))
+})
+
+router.get('/:Id/', (req, res) => {
+  database.Book.one(req.params.Id)
+    .then( book => res.render( 'details' , { book } ))
+    .catch( error => res.send({ error, message: error.message }))
+})
+
+
+router.post('/delete/:id', (req, res, next) =>{
+  const { id } = req.params.Id
+
+  Book.delete( id )
+    .catch( error => res.send({ error, message: error.message }))
+    .then( book => res.render('index', {book} ))
+  next()
+})
 
 
 module.exports = router;

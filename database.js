@@ -6,10 +6,14 @@ const connectionString = `postgres://${process.env.USER}@localhost:5432/${databa
 const db = pgp(connectionString);
 
 var SelectQuery = require('./models/selectQuery');
+var InsertQuery = require('./models/insertQuery');
+var DeleteQuery = require('./models/deleteQuery');
 
 const Book = {
   all: (page, size) => db.any( (new SelectQuery( 'books', { page, size } )).toString() ),
-  one: id => db.one( (new SelectQuery( 'book', { where: [{ id }] } )).toString() )
+  one: id => db.one( (new SelectQuery( 'books', { where: [{ id }] } )).toString() ),
+  insert: id => db.one( ( new InsertQuery( 'books', id ) ).toString() ),
+  delete: id => db.one( ( new DeleteQuery( 'books', id ) ).toString() )
 }
 
 const Search = {
@@ -26,8 +30,8 @@ const Search = {
 
       variables.push(search_query)
       sql += `
-      LEFT JOIN author_books ON books.id=author_books.book_id
-      LEFT JOIN authors ON authors.id=author_books.author_id
+      LEFT JOIN book_authors ON books.id=book_authors.book_id
+      LEFT JOIN authors ON authors.id=book_authors.author_id
       LEFT JOIN book_genres ON books.id=book_genres.book_id
       LEFT JOIN genres ON genres.id=book_genres.genre_id
       WHERE LOWER(books.title)  LIKE $${variables.length}
