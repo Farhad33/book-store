@@ -11,25 +11,27 @@ router.get('/', (req, res, next) => {
   database.Book.all( page, size )
     .then( books => res.render( 'books', { books, page, size } ))
     .catch( error => res.send({ error, message: error.message }))
-});
+})
 
 router.get( '/add', (req, res) => {
   res.render( 'add' )
 })
 
 router.post( '/', (req, res) => {
-  res.send({ book: req.body })
+  database.Book.insert( req.body )
+  .then(id => res.send( '/' , {book: req.body }) )
+  .catch( error => res.send({ error, message: error.message }))
 })
 
-router.get('/:Id/', function(req, res) {
+router.get('/:Id/', (req, res) => {
   database.Book.one(req.params.Id)
     .then( book => res.render( 'details' , { book } ))
-    .catch( function( error ) { res.status( 500 ).send( error ) })
-});
+    .catch( error => res.send({ error, message: error.message }))
+})
 
 
 router.post('/delete/:id', (req, res, next) =>{
-  const { id } = req.params
+  const { id } = req.params.Id
 
   Book.delete( id )
     .catch( error => res.send({ error, message: error.message }))

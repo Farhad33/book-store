@@ -6,11 +6,14 @@ const connectionString = `postgres://${process.env.USER}@localhost:5432/${databa
 const db = pgp(connectionString);
 
 var SelectQuery = require('./models/selectQuery');
+var InsertQuery = require('./models/insertQuery');
+var DeleteQuery = require('./models/deleteQuery');
 
 const Book = {
   all: (page, size) => db.any( (new SelectQuery( 'books', { page, size } )).toString() ),
-  one: id => db.one( (new SelectQuery( 'books', { where: [{ id }] } )).toString() )
-
+  one: id => db.one( (new SelectQuery( 'books', { where: [{ id }] } )).toString() ),
+  insert: id => db.one( ( new InsertQuery( 'books', id ) ).toString() ),
+  delete: id => db.one( ( new DeleteQuery( 'books', id ) ).toString() )
 }
 
 const Search = {

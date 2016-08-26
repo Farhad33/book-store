@@ -5,13 +5,15 @@ class InsertQuery {
     }
 
     this.table = table
-    this.columns = options['columns'] || []
-    this.values = options['values'] || []
+    this.columns = Object.keys( options )
+    this.values = this.columns.map( key => `'${options[ key ]}'` )
 
   }
 
   toInsert() {
-    return `INSERT INTO ${this.getColumns()} VALUES ${this.getValues()}`
+    const sql = `INSERT INTO ${this.getColumns()} VALUES ${this.getValues()} RETURNING id`
+    console.log( sql )
+    return sql
   }
 
   getColumns() {

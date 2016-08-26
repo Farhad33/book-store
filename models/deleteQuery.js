@@ -17,4 +17,4 @@ class DeleteQuery {
   }
 }
 
-module.exports = SelectQuery
+module.exports = DeleteQuery
